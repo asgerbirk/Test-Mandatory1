@@ -598,8 +598,8 @@ async function insertPostalCodes() {
     skipDuplicates: true,
   });
   await prisma.$executeRawUnsafe(`
-    DELETE p1 FROM postal_code p1
-    INNER JOIN postal_code p2 
+    DELETE p1 FROM postalcode p1
+    INNER JOIN postalcode p2 
     WHERE p1.cPostalCode = p2.cPostalCode 
     AND p1.cTownName > p2.cTownName;
   `);
