@@ -1,7 +1,7 @@
 Lav en env file
 
 
-DATABASE_URL="mysql://root:<password>@localhost:3306/addresses"
+DATABASE_URL="mysql://root:JERESKODEORDTILJEREESDATABASE@localhost:3306/addresses"
 
 npx prisma migrate 
 
