@@ -11,6 +11,10 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 app.get("/cpr", (req: Request, res: Response) => {
   const fakePerson = new FakeInfo();
   res.json({ CPR: fakePerson.getCpr() });
