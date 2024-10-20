@@ -1,12 +1,10 @@
-const BASE_URL = 'D:/Projects/TestManda/js_fake_info_frontend/index.html';
-
 
 //cy.get('#txtNumberPersons') //For ID
 //cy.get('input[value="Generate"]') //For value
 //cy.get('.cprValue') //For class
 
 beforeEach(() => {
-  cy.visit('D:/Projects/TestManda/js_fake_info_frontend/index.html');
+  cy.visit('/');
 });
 
 describe('CPR length test', () => {
