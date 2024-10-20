@@ -28,7 +28,8 @@ jobs:
 
       - name: Start backend in background
         run: |
-          nohup npm run start & # Run backend in the background
+            nohup npm run start > backend.log 2>&1 &
+            tail -f backend.log &
 
       - name: Wait for backend to be ready
         run: |
