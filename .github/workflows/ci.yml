@@ -26,6 +26,27 @@ jobs:
 
       - name: Run Vitest tests
         run: npm run test:ci
+
+  postman-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Postman tests
+        run: |
+          cd PostmanTests
+          newman run API test.postman_collection.json -e TestingManda.postman_environment.json
+
 #  e2e:
 #    runs-on: ubuntu-latest
 #
