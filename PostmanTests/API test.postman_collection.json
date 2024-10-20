@@ -1,0 +1,479 @@
+{
+	"info": {
+		"_postman_id": "093d209b-8e19-445d-9eba-06a63f475624",
+		"name": "API test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29879157"
+	},
+	"item": [
+		{
+			"name": "get CPR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains valid CPR\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"CPR\");\r",
+							"    pm.expect(jsonData.CPR).to.match(/^\\d{10}$/); // CPR must be 10 digits\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/cpr",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"cpr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Name and Gender",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains name and gender\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"firstName\");\r",
+							"    pm.expect(jsonData).to.have.property(\"lastName\");\r",
+							"    pm.expect(jsonData).to.have.property(\"gender\");\r",
+							"    pm.expect([\"male\", \"female\"]).to.include(jsonData.gender);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is JSON\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/name-gender",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"name-gender"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Name, Gender and DOB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains name, gender, and date of birth\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"firstName\");\r",
+							"    pm.expect(jsonData).to.have.property(\"lastName\");\r",
+							"    pm.expect(jsonData).to.have.property(\"gender\");\r",
+							"    pm.expect(jsonData).to.have.property(\"birthDate\");\r",
+							"    pm.expect(jsonData.birthDate).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/name-gender-dob",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"name-gender-dob"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get CPR, Name and Gender",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains CPR, name, and gender\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"CPR\");\r",
+							"    pm.expect(jsonData.CPR).to.match(/^\\d{10}$/);\r",
+							"    pm.expect(jsonData).to.have.property(\"firstName\");\r",
+							"    pm.expect(jsonData).to.have.property(\"lastName\");\r",
+							"    pm.expect(jsonData).to.have.property(\"gender\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/cpr-name-gender",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"cpr-name-gender"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get CPR, Name, Gender, DOB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains CPR, name, gender, and birthDate\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"CPR\");\r",
+							"    pm.expect(jsonData.CPR).to.match(/^\\d{10}$/);\r",
+							"    pm.expect(jsonData).to.have.property(\"firstName\");\r",
+							"    pm.expect(jsonData).to.have.property(\"lastName\");\r",
+							"    pm.expect(jsonData).to.have.property(\"gender\");\r",
+							"    pm.expect(jsonData).to.have.property(\"birthDate\");\r",
+							"    pm.expect(jsonData.birthDate).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+							"\r",
+							"    const birthdate = jsonData.birthDate;\r",
+							"    const birthYear = birthdate.slice(2, 4);\r",
+							"    const birthMonth = birthdate.slice(5, 7);\r",
+							"    const birthDay = birthdate.slice(8, 10);\r",
+							"\r",
+							"    const cprDate = jsonData.CPR.slice(0,6);\r",
+							"    const cprDay = cprDate.slice(0, 2);\r",
+							"    const cprMonth = cprDate.slice(2, 4);\r",
+							"    const cprYear = cprDate.slice(4, 6);\r",
+							"\r",
+							"    pm.expect(cprDay).to.eql(birthDay);\r",
+							"    pm.expect(cprMonth).to.eql(birthMonth);\r",
+							"    pm.expect(cprYear).to.eql(birthYear);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/cpr-name-gender-dob",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"cpr-name-gender-dob"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Address",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Address is returned\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"street\");\r",
+							"    pm.expect(jsonData).to.have.property(\"postal_code\");\r",
+							"    pm.expect(jsonData).to.have.property(\"number\");\r",
+							"    pm.expect(jsonData).to.have.property(\"floor\");\r",
+							"    pm.expect(jsonData).to.have.property(\"door\");\r",
+							"    pm.expect(jsonData).to.have.property(\"town_name\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/address",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Phonenumber",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Phone number is returned\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"phoneNumber\");\r",
+							"    pm.expect(jsonData.phoneNumber).to.match(/^\\d{8}$/);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/phone",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"phone"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Person",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains full fake person information\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(jsonData).to.have.property(\"CPR\");\r",
+							"    pm.expect(jsonData.CPR).to.match(/^\\d{10}$/);\r",
+							"\r",
+							"    pm.expect(jsonData).to.have.property(\"firstName\");\r",
+							"    pm.expect(jsonData).to.have.property(\"lastName\");\r",
+							"    pm.expect(jsonData).to.have.property(\"gender\");\r",
+							"    pm.expect(jsonData.gender).to.be.oneOf([\"male\", \"female\"]);\r",
+							"    \r",
+							"    pm.expect(jsonData).to.have.property(\"birthDate\");\r",
+							"    pm.expect(jsonData.birthDate).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+							"    \r",
+							"    const birthDate = jsonData.birthDate;\r",
+							"    const birthYear = birthDate.slice(2, 4);\r",
+							"    const birthMonth = birthDate.slice(5, 7);\r",
+							"    const birthDay = birthDate.slice(8, 10);\r",
+							"\r",
+							"    const cprDatePart = jsonData.CPR.slice(0, 6);\r",
+							"    const cprDay = cprDatePart.slice(0, 2);\r",
+							"    const cprMonth = cprDatePart.slice(2, 4);\r",
+							"    const cprYear = cprDatePart.slice(4, 6);\r",
+							"\r",
+							"    pm.expect(cprDay).to.eql(birthDay);\r",
+							"    pm.expect(cprMonth).to.eql(birthMonth);\r",
+							"    pm.expect(cprYear).to.eql(birthYear);\r",
+							"\r",
+							"    pm.expect(jsonData).to.have.property(\"address\");\r",
+							"    pm.expect(jsonData.address).to.have.property(\"street\");\r",
+							"    pm.expect(jsonData.address).to.have.property(\"number\");\r",
+							"    pm.expect(jsonData.address).to.have.property(\"floor\");\r",
+							"    pm.expect(jsonData.address).to.have.property(\"door\");\r",
+							"    pm.expect(jsonData.address).to.have.property(\"postal_code\");\r",
+							"    pm.expect(jsonData.address).to.have.property(\"town_name\");\r",
+							"\r",
+							"    pm.expect(jsonData).to.have.property(\"phoneNumber\");\r",
+							"    pm.expect(jsonData.phoneNumber).to.match(/^\\d{8}$/);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/person",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"person"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Multiple People",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains bulk fake persons information\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(jsonData).to.be.an(\"array\").that.has.length.greaterThan(0);\r",
+							"    \r",
+							"    jsonData.forEach((person) => {\r",
+							"        pm.expect(person).to.have.property(\"CPR\");\r",
+							"        pm.expect(person.CPR).to.match(/^\\d{10}$/);\r",
+							"\r",
+							"        pm.expect(person).to.have.property(\"firstName\");\r",
+							"        pm.expect(person).to.have.property(\"lastName\");\r",
+							"        pm.expect(person).to.have.property(\"gender\");\r",
+							"        pm.expect(person.gender).to.be.oneOf([\"male\", \"female\"]);\r",
+							"\r",
+							"        pm.expect(person).to.have.property(\"birthDate\");\r",
+							"        pm.expect(person.birthDate).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+							"        \r",
+							"        const birthDate = person.birthDate;\r",
+							"        const birthYear = birthDate.slice(2, 4);\r",
+							"        const birthMonth = birthDate.slice(5, 7);\r",
+							"        const birthDay = birthDate.slice(8, 10);\r",
+							"\r",
+							"        const cprDatePart = person.CPR.slice(0, 6);\r",
+							"        const cprDay = cprDatePart.slice(0, 2);\r",
+							"        const cprMonth = cprDatePart.slice(2, 4);\r",
+							"        const cprYear = cprDatePart.slice(4, 6);\r",
+							"\r",
+							"        pm.expect(cprDay).to.eql(birthDay);\r",
+							"        pm.expect(cprMonth).to.eql(birthMonth);\r",
+							"        pm.expect(cprYear).to.eql(birthYear);\r",
+							"\r",
+							"        pm.expect(person).to.have.property(\"address\");\r",
+							"        pm.expect(person.address).to.have.property(\"street\");\r",
+							"        pm.expect(person.address).to.have.property(\"number\");\r",
+							"        pm.expect(person.address).to.have.property(\"floor\");\r",
+							"        pm.expect(person.address).to.have.property(\"door\");\r",
+							"        pm.expect(person.address).to.have.property(\"postal_code\");\r",
+							"        pm.expect(person.address).to.have.property(\"town_name\");\r",
+							"\r",
+							"        pm.expect(person).to.have.property(\"phoneNumber\");\r",
+							"        pm.expect(person.phoneNumber).to.match(/^\\d{8}$/);\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/person?n=5",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"person"
+					],
+					"query": [
+						{
+							"key": "n",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,10 +1,12 @@
 import express, { Request, Response } from "express";
 import FakeInfo from "./routes/FakeInfoRouter.js";
+import cors from "cors";
 
 const app = express();
 const PORT = 8080;
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/cpr", (req: Request, res: Response) => {
   const fakePerson = new FakeInfo();
