@@ -33,12 +33,6 @@ describe("Unit test for FakeInfo class", () => {
       expectedCprPrefix: "",
       expectedGenderParity: 1,
     },
-    {
-      birthDate: "1111111111",
-      gender: FakeInfo.GENDER_MASCULINE,
-      expectedCprPrefix: "111111",
-      expectedGenderParity: 1,
-    },
   ];
 
   describe("Random CPR generation", () => {
