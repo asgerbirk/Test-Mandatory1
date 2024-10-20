@@ -10,7 +10,7 @@
     "dev": "nodemon src/index.ts",
     "test": "vitest",
     "test:ci": "vitest --run",
-    "test:e2e": "npx cypress run"
+    "test:e2e": "cypress run --config-file E2ETests/cypress.config.js"
   },
   "keywords": [],
   "author": "",
