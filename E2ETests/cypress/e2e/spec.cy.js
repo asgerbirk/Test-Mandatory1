@@ -1,4 +1,4 @@
-const BASE_URL = 'http://127.0.0.1:5500/index.html';
+const BASE_URL = 'http://localhost:63342/TestManda/js_fake_info_frontend/index.html';
 
 
 //cy.get('#txtNumberPersons') //For ID
