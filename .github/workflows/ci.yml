@@ -45,7 +45,7 @@ jobs:
       - name: Run Postman tests
         run: |
           cd PostmanTests
-          newman run API test.postman_collection.json -e TestingManda.postman_environment.json
+          newman run API_test.postman_collection.json -e TestingManda.postman_environment.json
 
 #  e2e:
 #    runs-on: ubuntu-latest
