@@ -9,8 +9,7 @@
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
     "test": "vitest",
-    "test:ci": "vitest --run",
-    "test:e2e": "npx cypress run --config-file E2ETests/cypress.config.js"
+    "test:ci": "vitest --run"
   },
   "keywords": [],
   "author": "",
