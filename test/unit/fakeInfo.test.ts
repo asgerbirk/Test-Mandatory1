@@ -28,9 +28,9 @@ describe("Unit test for FakeInfo class", () => {
       expectedGenderParity: 0,
     },
     {
-      birthDate: "",
+      birthDate: "9999999999",
       gender: FakeInfo.GENDER_MASCULINE,
-      expectedCprPrefix: "",
+      expectedCprPrefix: "999999",
       expectedGenderParity: 1,
     },
   ];
