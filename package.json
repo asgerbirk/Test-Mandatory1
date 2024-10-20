@@ -8,7 +8,9 @@
     "insertData": "node dist/data/seedPostalCodes.js",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "test:ci": "vitest --run",
+    "test:e2e": "cypress run"
   },
   "keywords": [],
   "author": "",
