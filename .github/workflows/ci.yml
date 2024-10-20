@@ -44,4 +44,5 @@ jobs:
 
     # Kør Cypress tests
     - name: Run Cypress tests
+      cd E2ETests
       run: npm run test:e2e
