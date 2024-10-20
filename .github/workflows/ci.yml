@@ -27,10 +27,12 @@ jobs:
         run: npm run build # Compile TypeScript to the dist folder
 
       - name: Start backend in background
-        run: npm run start
+        run: |
+          nohup npm run start & # Run backend in the background
 
-  #    - name: Wait for backend to be ready
-  #      run: npx wait-on http://localhost:8080 # Wait until backend is available
+      - name: Wait for backend to be ready
+        run: |
+          npx wait-on http://localhost:8080 # Adjust the port if needed to match your backend
 
   unit-test:
     runs-on: ubuntu-latest
@@ -50,7 +52,7 @@ jobs:
         run: npm run test:ci
 
   postman-test:
-    #needs: start-backend # Ensure the backend is started first
+    needs: start-backend # Ensure the backend is started first
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -69,22 +71,23 @@ jobs:
           cd PostmanTests
           newman run API_test.postman_collection.json -e TestingManda.postman_environment.json
 
-#  e2e:
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v3
-#
-#      - name: Setup Node.js
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: "18"
-#
-#     - name: Install dependencies
-#        run: npm install
-#
-#      - name: Run Cypress tests
-#        run: |
-#          cd E2ETests
-#          npx cypress run
+  e2e:
+    needs: start-backend # Ensure backend is started first
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress tests
+        run: |
+          cd E2ETests
+          npx cypress run
