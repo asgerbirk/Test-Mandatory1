@@ -70,11 +70,11 @@ class FakeInfo {
   private static readonly MIN_BULK_PERSONS = 2;
   private static readonly MAX_BULK_PERSONS = 100;
 
-  private cpr!: string;
-  private firstName!: string;
-  private lastName!: string;
-  private gender!: string;
-  private birthDate!: string;
+  private cpr: string;
+  private firstName: string;
+  private lastName: string;
+  public gender: string;
+  public birthDate: string;
   private address: { [key: string]: string | number } = {};
   private phone!: string;
 
@@ -86,18 +86,23 @@ class FakeInfo {
     this.setPhone();
   }
 
-  private setCpr(): void {
+  public setCpr(cpr?: string): void {
     if (!this.birthDate) {
       this.setBirthDate();
     }
     if (!this.firstName || !this.lastName || !this.gender) {
       this.setFullNameAndGender();
     }
-    const finalDigit = Math.floor(Math.random() * 10);
-    const genderBasedFinalDigit =
-      this.gender === FakeInfo.GENDER_FEMININE && finalDigit % 2 !== 0
-        ? finalDigit + 1
-        : finalDigit;
+    let finalDigit = Math.floor(Math.random() * 10);
+
+    if (this.gender === FakeInfo.GENDER_FEMININE && finalDigit % 2 !== 0) {
+      finalDigit = (finalDigit + 1) % 10;
+    } else if (
+      this.gender === FakeInfo.GENDER_MASCULINE &&
+      finalDigit % 2 === 0
+    ) {
+      finalDigit = (finalDigit + 1) % 10;
+    }
 
     this.cpr =
       this.birthDate.slice(8, 10) +
@@ -106,10 +111,17 @@ class FakeInfo {
       FakeInfo.getRandomDigit() +
       FakeInfo.getRandomDigit() +
       FakeInfo.getRandomDigit() +
-      genderBasedFinalDigit.toString();
+      finalDigit.toString();
   }
 
-  private setBirthDate(): void {
+  public getCpr(): string {
+    return this.cpr;
+  }
+
+  public getBirthDate(): string {
+    return this.birthDate;
+  }
+  public setBirthDate(date?: string): string {
     const year =
       Math.floor(Math.random() * (new Date().getFullYear() - 1900 + 1)) + 1900;
     const month = Math.floor(Math.random() * 12) + 1;
@@ -123,9 +135,15 @@ class FakeInfo {
     this.birthDate = `${year}-${String(month).padStart(2, "0")}-${String(
       day
     ).padStart(2, "0")}`;
+
+    return this.birthDate;
   }
 
-  private setFullNameAndGender(): void {
+  public setGender(gender: string): void {
+    this.gender = gender;
+  }
+
+  public setFullNameAndGender(): void {
     const person =
       personNames.persons[
         Math.floor(Math.random() * personNames.persons.length)
@@ -156,7 +174,7 @@ class FakeInfo {
     this.address["town_name"] = "SomeTown";
   }
 
-  private generateDoorType(doorType: number): string {
+  public generateDoorType(doorType: number): string {
     if (doorType < 8) return "th";
     if (doorType < 15) return "tv";
     if (doorType < 17) return "mf";
@@ -168,7 +186,7 @@ class FakeInfo {
     return door + Math.floor(Math.random() * 999).toString();
   }
 
-  private setPhone(): void {
+  public setPhone(): void {
     const phonePrefix =
       FakeInfo.PHONE_PREFIXES[
         Math.floor(Math.random() * FakeInfo.PHONE_PREFIXES.length)
@@ -178,10 +196,6 @@ class FakeInfo {
       Array.from({ length: 8 - phonePrefix.length }, () =>
         FakeInfo.getRandomDigit()
       ).join("");
-  }
-
-  public getCpr(): string {
-    return this.cpr;
   }
 
   public getFullNameAndGender(): {
