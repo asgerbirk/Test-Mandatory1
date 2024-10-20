@@ -8,19 +8,46 @@ describe("Unit test for FakeInfo class", () => {
     fakeInfo = new FakeInfo();
   });
 
+  const cprTestCases = [
+    {
+      birthDate: "1990-01-01",
+      gender: FakeInfo.GENDER_MASCULINE,
+      expectedCprPrefix: "010190",
+      expectedGenderParity: 1,
+    },
+    {
+      birthDate: "1985-12-31",
+      gender: FakeInfo.GENDER_FEMININE,
+      expectedCprPrefix: "311285",
+      expectedGenderParity: 0,
+    },
+  ];
+
   describe("Random CPR generation", () => {
-    it("should generate a valid CPR based on birthDate and gender", () => {
-      fakeInfo.birthDate = "1990-01-01";
-      // fakeInfo.gender = FakeInfo.GENDER_MASCULINE;
+    it.each(cprTestCases)(
+      "should generate a valid CPR for birthDate: $birthDate and gender: $gender",
+      ({ birthDate, gender, expectedCprPrefix, expectedGenderParity }) => {
+        // Arrange
+        fakeInfo.birthDate = birthDate;
+        console.log(fakeInfo.birthDate);
 
-      // Act: Generate a CPR
-      fakeInfo.setCpr();
+        fakeInfo.gender = gender;
+        console.log(fakeInfo);
+        console.log(fakeInfo.gender);
 
-      const cpr = fakeInfo.getCpr();
-      expect(cpr).toHaveLength(10);
-      expect(cpr.startsWith("010190")).toBe(true);
-      const finalDigit = parseInt(cpr[cpr.length - 1], 10);
-      //expect(finalDigit % 2).toBe(1); // Final digit should be odd for males
-    });
+        // Act
+        fakeInfo.setCpr();
+        const cpr = fakeInfo.getCpr();
+
+        console.log("Generated CPR:", cpr);
+
+        // Assert
+        expect(cpr).toHaveLength(10);
+        expect(cpr.startsWith(expectedCprPrefix)).toBe(true);
+
+        const finalDigit = parseInt(cpr[cpr.length - 1], 10);
+        expect(finalDigit % 2).toBe(expectedGenderParity);
+      }
+    );
   });
 });

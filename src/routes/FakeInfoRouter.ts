@@ -73,7 +73,7 @@ class FakeInfo {
   private cpr: string;
   private firstName: string;
   private lastName: string;
-  private gender: string;
+  public gender: string;
   public birthDate: string;
   private address: { [key: string]: string | number } = {};
   private phone!: string;
@@ -132,6 +132,10 @@ class FakeInfo {
     ).padStart(2, "0")}`;
 
     return this.birthDate;
+  }
+
+  public setGender(gender: string): void {
+    this.gender = gender;
   }
 
   public setFullNameAndGender(): void {
