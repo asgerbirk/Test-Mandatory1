@@ -95,9 +95,11 @@ class FakeInfo {
     }
     const finalDigit = Math.floor(Math.random() * 10);
     const genderBasedFinalDigit =
-      this.gender === FakeInfo.GENDER_FEMININE && finalDigit % 2 !== 0
-        ? finalDigit + 1
-        : finalDigit;
+    this.gender === FakeInfo.GENDER_FEMININE && finalDigit % 2 !== 0
+      ? (finalDigit + 1) % 10  // For kvinder, sikre lige ciffer
+      : this.gender === FakeInfo.GENDER_MASCULINE && finalDigit % 2 === 0
+      ? finalDigit + 1  // For mænd, sikre ulige ciffer
+      : finalDigit;
 
     this.cpr =
       this.birthDate.slice(8, 10) +

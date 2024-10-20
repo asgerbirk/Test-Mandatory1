@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import FakeInfo from "./routes/FakeInfoRouter.js";
+import 'dotenv/config'
 
 const app = express();
 const PORT = 8080;
