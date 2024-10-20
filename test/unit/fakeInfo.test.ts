@@ -21,13 +21,30 @@ describe("Unit test for FakeInfo class", () => {
       expectedCprPrefix: "311285",
       expectedGenderParity: 0,
     },
+    {
+      birthDate: "0000-00-00",
+      gender: FakeInfo.GENDER_FEMININE,
+      expectedCprPrefix: "000000",
+      expectedGenderParity: 0,
+    },
+    {
+      birthDate: "",
+      gender: FakeInfo.GENDER_MASCULINE,
+      expectedCprPrefix: "",
+      expectedGenderParity: 1,
+    },
+    {
+      birthDate: "1111111111",
+      gender: FakeInfo.GENDER_MASCULINE,
+      expectedCprPrefix: "111111",
+      expectedGenderParity: 1,
+    },
   ];
 
   describe("Random CPR generation", () => {
     it.each(cprTestCases)(
       "should generate a valid CPR for birthDate: $birthDate and gender: $gender",
       ({ birthDate, gender, expectedCprPrefix, expectedGenderParity }) => {
-        // Arrange
         fakeInfo.birthDate = birthDate;
         console.log(fakeInfo.birthDate);
 
@@ -35,13 +52,11 @@ describe("Unit test for FakeInfo class", () => {
         console.log(fakeInfo);
         console.log(fakeInfo.gender);
 
-        // Act
         fakeInfo.setCpr();
         const cpr = fakeInfo.getCpr();
 
         console.log("Generated CPR:", cpr);
 
-        // Assert
         expect(cpr).toHaveLength(10);
         expect(cpr.startsWith(expectedCprPrefix)).toBe(true);
 
