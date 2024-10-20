@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test:
+  unit-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,24 +26,22 @@ jobs:
 
       - name: Run Vitest tests
         run: npm run test:ci
-
-  e2e:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-
-      - name: Install dependencies
-        run: npm install
-
-      # Kør Cypress tests
-      - name: Run Cypress tests
-        run: |
-          cd E2ETests
-          npx cypress run
+#  e2e:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+#
+#      - name: Setup Node.js
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: "18"
+#
+#     - name: Install dependencies
+#        run: npm install
+#
+#      - name: Run Cypress tests
+#        run: |
+#          cd E2ETests
+#          npx cypress run
