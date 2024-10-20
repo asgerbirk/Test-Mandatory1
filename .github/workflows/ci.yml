@@ -62,7 +62,6 @@ jobs:
 
       - name: Run Postman tests
         run: |
-          npm run dev
           cd PostmanTests
           newman run API_test.postman_collection.json -e TestingManda.postman_environment.json
 
