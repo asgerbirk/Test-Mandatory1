@@ -6,7 +6,7 @@ const BASE_URL = 'D:/Projects/TestManda/js_fake_info_frontend/index.html';
 //cy.get('.cprValue') //For class
 
 beforeEach(() => {
-  cy.visit(BASE_URL);
+  cy.visit('D:/Projects/TestManda/js_fake_info_frontend/index.html');
 });
 
 describe('CPR length test', () => {

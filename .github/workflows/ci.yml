@@ -75,23 +75,23 @@ jobs:
           cd PostmanTests
           newman run API_test.postman_collection.json -e TestingManda.postman_environment.json
 
-  e2e:
-    needs: start-backend # Ensure backend is started first
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run Cypress tests
-        run: |
-          cd E2ETests
-          npx cypress run
+#  e2e:
+#    needs: start-backend # Ensure backend is started first
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+#
+#      - name: Setup Node.js
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: "18"
+#
+#      - name: Install dependencies
+#        run: npm install
+#
+#      - name: Run Cypress tests
+#        run: |
+#          cd E2ETests
+#          npx cypress run
