@@ -93,11 +93,16 @@ class FakeInfo {
     if (!this.firstName || !this.lastName || !this.gender) {
       this.setFullNameAndGender();
     }
-    const finalDigit = Math.floor(Math.random() * 10);
-    const genderBasedFinalDigit =
-      this.gender === FakeInfo.GENDER_FEMININE && finalDigit % 2 !== 0
-        ? finalDigit + 1
-        : finalDigit;
+    let finalDigit = Math.floor(Math.random() * 10);
+
+    if (this.gender === FakeInfo.GENDER_FEMININE && finalDigit % 2 !== 0) {
+      finalDigit = (finalDigit + 1) % 10;
+    } else if (
+      this.gender === FakeInfo.GENDER_MASCULINE &&
+      finalDigit % 2 === 0
+    ) {
+      finalDigit = (finalDigit + 1) % 10;
+    }
 
     this.cpr =
       this.birthDate.slice(8, 10) +
@@ -106,7 +111,7 @@ class FakeInfo {
       FakeInfo.getRandomDigit() +
       FakeInfo.getRandomDigit() +
       FakeInfo.getRandomDigit() +
-      genderBasedFinalDigit.toString();
+      finalDigit.toString();
   }
 
   public getCpr(): string {
