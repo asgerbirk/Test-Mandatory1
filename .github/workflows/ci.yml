@@ -50,7 +50,7 @@ jobs:
         run: npm run test:ci
 
   postman-test:
-    needs: start-backend # Ensure the backend is started first
+    #needs: start-backend # Ensure the backend is started first
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
