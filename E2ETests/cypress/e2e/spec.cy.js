@@ -1,12 +1,10 @@
-const BASE_URL = 'http://127.0.0.1:5500/index.html';
-
 
 //cy.get('#txtNumberPersons') //For ID
 //cy.get('input[value="Generate"]') //For value
 //cy.get('.cprValue') //For class
 
 beforeEach(() => {
-  cy.visit(BASE_URL);
+  cy.visit('/');
 });
 
 describe('CPR length test', () => {
