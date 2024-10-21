@@ -169,7 +169,6 @@ class FakeInfo {
     const doorType = Math.floor(Math.random() * 20) + 1;
     this.address["door"] = this.generateDoorType(doorType);
 
-    // TODO: Add logic for getting postal codes from a database or predefined list
     this.address["postal_code"] = "1234";
     this.address["town_name"] = "SomeTown";
   }
