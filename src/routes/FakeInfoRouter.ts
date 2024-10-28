@@ -86,6 +86,13 @@ class FakeInfo {
     this.setPhone();
   }
 
+  public validateCpr() {
+    if (!this.cpr || this.cpr.length !== 10) {
+      throw new Error(
+        "Invalid CPR length: CPR must be exactly 10 digits long."
+      );
+    }
+  }
   public setCpr(cpr?: string): void {
     if (!this.birthDate) {
       this.setBirthDate();
@@ -112,9 +119,12 @@ class FakeInfo {
       FakeInfo.getRandomDigit() +
       FakeInfo.getRandomDigit() +
       finalDigit.toString();
+
+    this.validateCpr();
   }
 
   public getCpr(): string {
+    this.validateCpr();
     return this.cpr;
   }
 
@@ -122,19 +132,37 @@ class FakeInfo {
     return this.birthDate;
   }
   public setBirthDate(date?: string): string {
-    const year =
-      Math.floor(Math.random() * (new Date().getFullYear() - 1900 + 1)) + 1900;
-    const month = Math.floor(Math.random() * 12) + 1;
-    const day =
-      month === 2
-        ? Math.floor(Math.random() * 28) + 1
-        : [4, 6, 9, 11].includes(month)
-        ? Math.floor(Math.random() * 30) + 1
-        : Math.floor(Math.random() * 31) + 1;
+    if (date) {
+      const year = parseInt(date.slice(0, 4), 10);
+      const currentYear = new Date().getFullYear();
 
-    this.birthDate = `${year}-${String(month).padStart(2, "0")}-${String(
-      day
-    ).padStart(2, "0")}`;
+      if (year < 1900) {
+        throw new Error(
+          "Invalid birthdate: Birthdate must be on or after 1900-01-01."
+        );
+      } else if (year > currentYear) {
+        throw new Error(
+          "Invalid birthdate: Birthdate must be in the past or present."
+        );
+      }
+
+      this.birthDate = date;
+    } else {
+      const year =
+        Math.floor(Math.random() * (new Date().getFullYear() - 1900 + 1)) +
+        1900;
+      const month = Math.floor(Math.random() * 12) + 1;
+      const day =
+        month === 2
+          ? Math.floor(Math.random() * 28) + 1
+          : [4, 6, 9, 11].includes(month)
+          ? Math.floor(Math.random() * 30) + 1
+          : Math.floor(Math.random() * 31) + 1;
+
+      this.birthDate = `${year}-${String(month).padStart(2, "0")}-${String(
+        day
+      ).padStart(2, "0")}`;
+    }
 
     return this.birthDate;
   }
@@ -169,7 +197,6 @@ class FakeInfo {
     const doorType = Math.floor(Math.random() * 20) + 1;
     this.address["door"] = this.generateDoorType(doorType);
 
-    // TODO: Add logic for getting postal codes from a database or predefined list
     this.address["postal_code"] = "1234";
     this.address["town_name"] = "SomeTown";
   }
