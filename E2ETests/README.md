@@ -1,5 +1,7 @@
 Clone the repository
 
+Make sure that the frontend and backend is running
+
 cd into the project folder 
 
 "npm install" to install dependencies
